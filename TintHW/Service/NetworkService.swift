@@ -48,9 +48,7 @@ final class APIManager {
     func fetchGenericJSONData<T: Codable>(endPoint: APIEndpoint, completion: @escaping (Result<T, TintError>) -> Void) {
         
         let endpoint = baseURL + endPoint.path
-        
-        print("fetchGenericJSONData", endpoint)
-        
+
         AF.request(endpoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: T.self) { response in
