@@ -8,13 +8,9 @@
 import UIKit
 
 class PhotoCollectionViewCell: UICollectionViewCell {
-
+    
     static let identifier = "PhotoCollectionViewCell"
-    
-    override var reuseIdentifier: String? {
-        return PhotoCollectionViewCell.identifier
-    }
-    
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -22,7 +18,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.contentView.backgroundColor = .red
     }
     
     override func prepareForReuse() {
@@ -31,10 +26,15 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         contentLabel.text = nil
         imageView.image = nil
     }
-
-    func configuration(model: PhotosCellModel) {
+    
+    func configuration(model: PhotosCellModel, image: UIImage?) {
         self.titleLabel.text = model.id
         self.contentLabel.text = model.title
-        //self.imageView.image = model.thumbnailUrl
+        if let image = image {
+            self.imageView.image = image
+        } else {
+            self.imageView.image = UIImage(systemName: "circle.square")
+        }
     }
 }
+

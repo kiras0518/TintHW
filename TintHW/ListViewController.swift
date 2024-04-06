@@ -37,8 +37,9 @@ extension ListViewController {
     
     private func fetchPhotos () {
 
-        viewModel.fetchPhotos { result in
-
+        viewModel.fetchPhotos { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let photos):
 
@@ -86,19 +87,22 @@ extension ListViewController: UICollectionViewDataSource, UICollectionViewDelega
         return viewModel.photos.count
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: (PhotoCollectionViewCell.identifier), for: indexPath) as? PhotoCollectionViewCell else { return UICollectionViewCell() }
         
         let photoData = viewModel.photos[indexPath.row]
         
-        cell.configuration(model: photoData)
+        cell.configuration(model: photoData, image: nil)
         
-        viewModel.loadImage(photoPath: photoData.thumbnailUrl) { image in
-           
+        viewModel.loadImage(photoPath: photoData.thumbnailUrl) { [weak collectionView] image in
+   
+            guard let collectionView = collectionView else { return }
+            
             DispatchQueue.main.async {
-                cell.imageView.image = image
+                if let cellToUpdate = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
+                    cellToUpdate.imageView.image = image
+                }
             }
         }
         

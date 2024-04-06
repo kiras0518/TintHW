@@ -14,11 +14,12 @@ class PhotoViewModel {
 
     func fetchPhotos(completion: @escaping (Result<[PhotosCellModel], TintError>) -> Void) {
         
-        APIManager.shared.fetchGenericJSONData(endPoint: APIEndpoints.photos) { (result: Result<[PhotosCellModel], TintError>) in
+        APIManager.shared.fetchGenericJSONData(endPoint: APIEndpoints.photos) { [weak self] (result: Result<[PhotosCellModel], TintError>) in
+            guard let self = self else { return }
             switch result {
-            case .success(let photos):
-                self.photos = photos
-                completion(.success(photos))
+            case .success(let newPhotos):
+                self.photos.append(contentsOf: newPhotos)
+                completion(.success(newPhotos))
             case .failure(let error):
                 completion(.failure(error))
             }

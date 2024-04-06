@@ -18,9 +18,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAR-C3-RWQ">
-                                <rect key="frame" x="159.66666666666666" y="408.66666666666669" width="74" height="35"/>
+                                <rect key="frame" x="144.33333333333334" y="408.66666666666669" width="104.66666666666666" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="To List"/>
+                                <buttonConfiguration key="configuration" style="gray" title="To Full List"/>
                                 <connections>
                                     <action selector="ActionButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="njo-jc-ZCH"/>
                                 </connections>
@@ -40,7 +40,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055.7251908396945" y="-23.239436619718312"/>
+            <point key="canvasLocation" x="1052.6717557251909" y="-23.239436619718312"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="AFQ-YW-OZ6">
